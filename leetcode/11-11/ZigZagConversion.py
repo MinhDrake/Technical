@@ -1,4 +1,5 @@
 class Solution:
+    # bai nay thi lan luot di len ( goingDown = false) va di xuong 0<=jump<=num(len)
     def convert(self, s: str, numRows: int) -> str:
         if numRows == 1 or numRows >= len(s):
             return s
