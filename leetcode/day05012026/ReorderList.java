@@ -44,7 +44,7 @@ public class ReorderList {
   }
 
   // Using deque
-  public void reorderList(ListNode head) {
+  public void reorderListDeque(ListNode head) {
     Deque<ListNode> deque = new ArrayDeque<>();
     ListNode current = head;
     while (current != null) {
@@ -67,6 +67,43 @@ public class ReorderList {
 
     newHead.next = null;
     head = dummy.next;
+  }
+
+  // using three-step maniulation
+  // the idea is link between first half and reverse second half
+  public void reorderList(ListNode head) {
+    ListNode slow = head, fast = head.next;
+
+    // split array, now slow is the last element of first head
+    while (fast != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+
+    // reverse linkedList
+    ListNode nextNode = slow.next;
+    ListNode prevNode = null;
+    slow.next = null; // cut first half
+
+    // quy tac nam vai
+    // nguoi sau nam vai nguoi truc, nguoi truoc the cho la nguoi sau, nguoi sau la
+    // nguoi tiep theo -> can temp
+    while (nextNode != null) {
+      ListNode tmp = nextNode.next;
+      nextNode.next = prevNode;
+      prevNode = nextNode;
+      nextNode = tmp;
+    }
+
+    // merge/ Interleave
+    ListNode first = head, second = prevNode;
+    while (first != null && second != null) {
+      ListNode firstNext = first.next, secondNext = second.next;
+      first.next = second;
+      second.next = firstNext;
+      first = firstNext;
+      second = secondNext;
+    }
   }
 
   public static void main(String[] args) {
