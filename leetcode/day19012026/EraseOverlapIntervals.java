@@ -7,13 +7,6 @@ public class EraseOverlapIntervals {
       return 0;
     }
     int count = 0;
-    Arrays.sort(intervals, (a, b) -> {
-      if (a[0] < b[0]) {
-        return true;
-      } else if (a[0] == b[0]) {
-        return a[1] < b[1];
-      }
-      return false;
-    });
+    Arra
   }
 }

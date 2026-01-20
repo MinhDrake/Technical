@@ -1,0 +1,5 @@
+Edge Translate is a simple and practical translation plugin that supports mainstream browsers
+ such as Chrome, Firefox, and 360 Secure Browser . The main purpose of our plugin is to assist u
+ sers in reading foreign literature. To this end, we have followed the principle of the user's
+  reading experience first, and made the following efforts:
+
