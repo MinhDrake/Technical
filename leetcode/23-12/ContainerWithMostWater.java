@@ -10,11 +10,11 @@ public class ContainerWithMostWater {
       int currArea = width * currHeight;
       maxArea = Math.max(maxArea, currArea);
 
-      // Move the pointer with smaller height
+      // Move the pointer with higher height
       if (height[left] < height[right]) {
-        left++;
-      } else {
         right--;
+      } else {
+        left++;
       }
     }
 

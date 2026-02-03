@@ -1,4 +1,4 @@
-package 28-11;
+package day28012026;
 
 public class LongestCommonPrefix {
   public String longestCommonPrefix(String[] strs) {
