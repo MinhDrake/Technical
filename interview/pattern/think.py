@@ -1,22 +1,18 @@
 from typing import List
 class Solution:
-    def sortColors(self, nums: List[int]) -> None:
-        two_idx = len(nums) -1
-        zero_idx = 0
-        i = 0
-        while i <= two_idx:
-            if nums[i] == 0:
-                nums[i], nums[zero_idx] = nums[zero_idx], nums[i]
-                zero_idx += 1
-            elif nums[i] == 2:
-                nums[i], nums[two_idx] = nums[two_idx], nums[i]
-                two_idx -= 1
-                i -= 1 # need to check nums at two idx
-            i += 1
+    def maxScore(self, cards: List[int], k: int) -> int:
+        start, end = -k , -k 
+        score = 0
+        ans = 0
+        while end < k:
+            score += cards[end]
+
+            if end - start + 1 >= k:
+                ans = max(ans, score)
+                score -= cards[start]
+                start += 1
+            end += 1
+        return ans
+
 sol = Solution()
-# nums = [1,0,2,0,0]
-nums = [2,0,1]
-print(sol.sortColors(nums))
-print(nums)
-        
-        
+print(sol.maxScore([1,2,3,4,5,6,1], 3))

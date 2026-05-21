@@ -107,3 +107,47 @@ print(main.query("w"))
 print(main.query("x"))
 print(main.query("y"))
 print(main.query("z"))
+
+
+from typing import List
+
+class TrieNode:
+    def __init__(self):
+        self.childrens = [None] * 9
+class Trie:
+    def __init__(self, nums: List[int]):
+        self.root = TrieNode()
+
+        for num in nums:
+            node = self.root
+            str_num = str(num)
+            for i in range(len(str_num)):
+                idx = int(str_num[i])
+                if not node.childrens[idx]:
+                    node.childrens[idx] = TrieNode()
+                node = node.childrens[idx]
+    def searchPrefix(self, num: int):
+        str_num = str(num)
+        node = self.root
+        count = 0
+        for num in str_num:
+            idx = int(num)
+            if node.childrens[idx]:
+                node = node.childrens[idx]
+                count += 1
+            else:
+                break
+        return count
+
+
+class Solution:
+    def longestCommonPrefix(self, arr1: List[int], arr2: List[int]):
+        trie = Trie(arr1)
+        ans = 0
+        for num in arr2:
+            ans = max(ans, trie.searchPrefix(num))
+        return ans
+
+
+sol = Solution()
+print(sol.longestCommonPrefix([10], [17,11]))

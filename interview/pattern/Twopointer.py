@@ -106,4 +106,25 @@ nums = [2,0,1]
 print(sol.sortColors(nums))
 print(nums)
         
-        
+from typing import List
+class Solution:
+    def trappingWater(self, height: List[int]) -> int:
+        if len(height) == 0:
+            return 0
+        left, right = 0, len(height) -1
+        left_max, right_max = height[left], height[right]
+        total = 0
+        while left < right:
+            if height[left] < height[right]:
+                total += left_max - height[left]
+                left += 1
+                left_max = max(left_max, height[left])
+            else:
+                total += right_max - height[right]
+                right -= 1
+                right_max = max(right_max, height[right])
+        return total
+
+sol = Solution()
+print(sol.trappingWater([3, 4, 1, 2, 2, 5, 1, 0, 2])) 
+
