@@ -66,7 +66,7 @@ class Solution:
 
             freq_counter[curr_num] += 1
             curr_sum += curr_num
-            
+
             if right - left + 1 > k:
                 left_num = nums[left]
 
@@ -75,20 +75,21 @@ class Solution:
                     del freq_counter[left_num]
                 curr_sum -= left_num
                 left += 1
-        
+
             if right - left + 1 == k and len(freq_counter) == k:
-                ans = max (ans, curr_sum)
+                ans = max(ans, curr_sum)
 
         return ans
 
-sol = Solution()
-print(sol.maximumSubarraySum([1,5,4,2,9,9,9], 3)) # 4 
-print(sol.maximumSubarraySum([4,4,4], 3))
 
-from typing import List
+sol = Solution()
+print(sol.maximumSubarraySum([1, 5, 4, 2, 9, 9, 9], 3))  # 4
+print(sol.maximumSubarraySum([4, 4, 4], 3))
+
+
 class Solution:
     def sortColors(self, nums: List[int]) -> None:
-        two_idx = len(nums) -1
+        two_idx = len(nums) - 1
         zero_idx = 0
         i = 0
         while i <= two_idx:
@@ -98,20 +99,22 @@ class Solution:
             elif nums[i] == 2:
                 nums[i], nums[two_idx] = nums[two_idx], nums[i]
                 two_idx -= 1
-                i -= 1 # need to check nums at two idx
+                i -= 1  # need to check nums at two idx
             i += 1
+
+
 sol = Solution()
 # nums = [1,0,2,0,0]
-nums = [2,0,1]
+nums = [2, 0, 1]
 print(sol.sortColors(nums))
 print(nums)
-        
-from typing import List
+
+
 class Solution:
     def trappingWater(self, height: List[int]) -> int:
         if len(height) == 0:
             return 0
-        left, right = 0, len(height) -1
+        left, right = 0, len(height) - 1
         left_max, right_max = height[left], height[right]
         total = 0
         while left < right:
@@ -125,6 +128,30 @@ class Solution:
                 right_max = max(right_max, height[right])
         return total
 
-sol = Solution()
-print(sol.trappingWater([3, 4, 1, 2, 2, 5, 1, 0, 2])) 
 
+sol = Solution()
+print(sol.trappingWater([3, 4, 1, 2, 2, 5, 1, 0, 2]))
+
+
+class Solution:
+    # not sort
+    def limitOccurrences(self, nums: list[int], k: int) -> list[int]:
+        count = {}
+        ans = []
+        for num in nums:
+            count[num] = count.get(num, 0) + 1
+            if count[num] <= k:
+                ans.append(num)
+        return ans
+
+    def limitOccurencesInPlace(self, nums: list[int], k: int) -> list[int]:
+        left = 0
+        for right in range(len(nums)):
+            if left < k or nums[right] != nums[left - k]:
+                nums[left] = nums[right]
+                left += 1
+        return nums[:left]
+
+
+sol = Solution()
+print(sol.limitOccurencesInPlace([1, 1, 1, 2, 2, 3], 2))
